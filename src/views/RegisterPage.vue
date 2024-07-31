@@ -5,28 +5,33 @@ import { useRouter } from 'vue-router'
 
 let email = ref('')
 let password = ref('')
+let confirmPassword = ref('')
 const router = useRouter()
 const authStore = useAuthStore()
 
-async function login() {
-  const success = await authStore.login(email.value, password.value)
-  if (success) {
-    router.push('./admin')
+async function register() {
+  if (password.value !== confirmPassword.value) {
+    alert('Passwords do not match')
+    return 
+  }
+  const success = await authStore.register(email.value, password.value)
+  if(success) {
+    router.push('/')
   } else {
-    alert('Invalid email or password')
+    alert('User already exits or invalid data')
   }
 }
 </script>
 
 <template>
-  <div class="login-page">
+  <div class="register-page">
     <div class="card">
       <div class="card-header">
-        <p><b>Admin</b>Lte</p>
+        <p><b>Admin</b>LTE</p>
       </div>
       <div class="card-body">
-        <p>Sign in to start your session</p>
-        <form @submit.prevent="login">
+        <p>Register a new membership</p>
+        <form @submit.prevent="register">
           <div class="input-group">
             <input type="text" required placeholder="Email" v-model="email" />
             <div class="input-icon">
@@ -39,15 +44,21 @@ async function login() {
               <i class="material-icons">lock</i>
             </div>
           </div>
+          <div class="input-group">
+            <input type="password" required placeholder="Retype Password" v-model="confirmPassword" />
+            <div class="input-icon">
+              <i class="material-icons">lock</i>
+            </div>
+          </div>
           <div class="actions">
-            <label><input type="checkbox" /> Remember me</label>
-            <button type="submit">Sign In</button>
+            <label><input type="checkbox" required/> I agree to the <span class="terms">terms</span></label>
+            <button type="submit">Register</button>
           </div>
         </form>
         <div class="social-medias">
           <div class="social-btn facebook">
             <i class="material-icons">facebook</i>
-            <p>Sign in using Facebook</p>
+            <p>Sign up using Facebook</p>
           </div>
           <div class="social-btn google">
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 488 512">
@@ -55,11 +66,10 @@ async function login() {
                 d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
               />
             </svg>
-            <p>Sign in using Google</p>
+            <p>Sign up using Google</p>
           </div>
           <div class="forgot-links">
-            <a href="#">I forgot my password</a>
-            <router-link to="/register">Register a new membership</router-link>
+            <router-link to="/">I alreade have a membership</router-link>
           </div>
         </div>
       </div>
@@ -68,7 +78,7 @@ async function login() {
 </template>
 
 <style scoped>
-.login-page {
+.register-page {
   display: flex;
   align-items: center;
   height: 100vh;
@@ -93,8 +103,8 @@ async function login() {
 
 .card-header p {
   font-size: 40px;
-  width: min-content;
   margin: 0 auto;
+  width: min-content;
 }
 
 .card-header p:hover {
@@ -134,6 +144,10 @@ form {
 .input-group input:focus {
   border-color: #80bdff;
   outline: none;
+}
+
+.terms {
+  color: #007bff;
 }
 
 .input-icon {
