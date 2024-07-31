@@ -1,19 +1,16 @@
 <script setup>
-
-console.log('AdminDashboard component')
-
-
+import HeaderDashboard from '@/components/HeaderDashboard.vue'
+import SidebarDashb from '@/components/SidebarDashb.vue'
 </script>
 
 <template>
-  <div>
-    <h1>Admin Dashboard</h1>
+  <div class="dashboard-page">
+    <HeaderDashboard />
+    <SidebarDashb />
   </div>
 </template>
 
 <style scoped>
-
-
 
 
 

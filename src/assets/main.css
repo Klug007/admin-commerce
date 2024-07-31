@@ -9,8 +9,24 @@
   font-family: "Source Sans 3", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 a {
-  /* color: inherit; */
+  color: inherit;
   font-size: inherit;
   text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
