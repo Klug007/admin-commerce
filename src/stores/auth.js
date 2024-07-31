@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     async login(email, password) {
-      const user = this.users.find((user) => user.email === email && user.password === password)
+      const user = await this.users.find((user) => user.email === email && user.password === password)
       if (user) {
         this.isAuthenticated = true
         return true

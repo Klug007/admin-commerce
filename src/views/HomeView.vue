@@ -8,7 +8,6 @@ console.log('AdminDashboard component')
 <template>
   <div>
     <h1>Admin Dashboard</h1>
-    <!-- Add your admin functionalities here -->
   </div>
 </template>
 
