@@ -1,5 +1,8 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth';
 import { reactive } from 'vue'
+
+const authStore = useAuthStore()
 
 const dropdowns = reactive({
   forum: false,
@@ -68,7 +71,7 @@ const toggleDropdown = (key) => {
           >
           <ul v-if="dropdowns.account" class="dropdown-menu">
             <li class="dropdown-item">Profile</li>
-            <li class="dropdown-item">Logout</li>
+            <router-link class="dropdown-item" @click="authStore.logout()">Logout</router-link>
           </ul>
         </li>
         <li>
