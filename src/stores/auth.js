@@ -8,7 +8,8 @@ export const useAuthStore = defineStore('auth', {
     }
     return {
       isAuthenticated: false,
-      users: [{ email: 'admin', password: 'password' }]
+      users: [{ email: 'admin', password: 'password' }],
+      isSidebarOpen: false
     }
   },
   actions: {
@@ -30,7 +31,6 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.isAuthenticated = false
       this.saveState()
-
     },
     async register(email, password) {
       const userExists = this.users.some((user) => user.email === email)
@@ -42,6 +42,9 @@ export const useAuthStore = defineStore('auth', {
       } else {
         return false
       }
+    },
+    toggleSidebar() {
+      this.isSidebarOpen = !this.isSidebarOpen
     }
   }
 })

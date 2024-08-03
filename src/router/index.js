@@ -30,7 +30,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
+
+  if ((to.path === '/' || to.path === '/register') && authStore.isAuthenticated) {
+    next({ path: '/admin' })
+  } else if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!authStore.isAuthenticated) {
       next({ path: '/' })
     } else {
